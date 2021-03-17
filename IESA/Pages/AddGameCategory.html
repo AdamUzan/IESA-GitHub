@@ -95,24 +95,51 @@
             })
            
 
-            $("#UpdateBtn").click(function () {
-                console.log("cat id:  "+Categoryid)
-              
-                var str = "";
-                str+="<br />"
-                str+="<br />"
-                str+="<br />"
-                str += "<label for='fname'>אנא עדכן כאן את שם הקטגוריה:</label>"       
-                str += "<input type='text' id='Update_Category' name='fname'>"
-                document.getElementById("addrestuarantPH").innerHTML = str;
 
-                
+            $(document).on("click", ".yoyo", function () {
+               
+
+
+                alert("got into UpdateBtn")
+                var Categoryid = this.getAttribute('data-Categoryid');
+                console.log("Categoryid:           " + Categoryid)
+               // var Status1 = this.getAttribute('data-Status1');
+
+               
+                var str = "";
+                str += "<br />"
+                str += "<br />"
+                str += "<br />"
+                str += "<label for='fname'>אנא עדכן כאן את שם הקטגוריה:</label>"
+                str += "<p>שם קטגוריה ישן:" + Update_Id + "</p>"
+                str+="<p>הכנס את השם החדש כאן:"
+                str += "<input type='text' id='Update_Category' name='fname'>"
+                str += "<button id='UpdateGameCategory' class='UGC  btn btn-light'>עדכן</button>"
+                document.getElementById("addrestuarantPH").innerHTML += str;
+
+
+
+
+
+
+
+
 
             })
 
-            $("#Update_Category").click(function () {
 
-                Update_GameCategory_Name();
+
+
+
+
+
+
+         
+
+            $(document).on("click", ".UGC", function () {
+                var UpdateCategoryName = $("#Update_Category").val()
+                console.log("UpdateCategoryName:  " + UpdateCategoryName)
+                Update_GameCategory_Name(Categoryid, UpdateCategoryName);
 
             })
 
@@ -277,7 +304,7 @@
                             else
                                 deleteBtn = "<button type='button' class = 'deleteBtn btn btn-success' " + dataCategory + "> הפעל </button>";
 
-                            deleteBtn += "<button type='button' class = 'btn btn-info' id='UpdateBtn' " + row.Categoryid + "> בחר לעדכון </button>";
+                            deleteBtn += "<button type='button' class = 'yoyo btn btn-info' id='UpdateBtn'" + dataCategory + "> בחר לעדכון </button>";
                            
 
                             return deleteBtn;
@@ -315,7 +342,7 @@
         function SetGameCategories() {
 
             var Cat = $("#Category").val();
-
+            
 
             var status = 1;
             console.log("category:  " + Cat)
@@ -375,8 +402,16 @@
 
 
 
-            function Update_GameCategory_Name() {
+        function Update_GameCategory_Name(Categoryid, UpdateCategoryName) {
 
+                alert("got into the Update of a Category Name")
+
+
+
+               
+
+
+            ajaxCall("PUT", "../api/GamesCategories?id=" + Categoryid + "&UpdateCategoryName=" + UpdateCategoryName, "", deleteSuccess, deleterror);
 
                 //כאן יהיה PUT לעדכון השם
 

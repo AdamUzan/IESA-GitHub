@@ -18,7 +18,31 @@ namespace IESA.Controllers
 
 
 
+        public int Post([FromBody] GamesCategories GameC) //Add_Game_Category.html
+        {
+            return GameC.InsertGameCategory();
+        }
 
+
+
+
+
+
+        public void Put(int id, string status)
+        {
+            GamesCategories c = new GamesCategories();
+            c.setNotactive(id, status);
+
+        } 
+
+
+        //צריך לשים פה ROUTE שידע ללכת לכאן
+        public void Put(int id, string UpdateCategoryName)
+        {
+            GamesCategories c = new GamesCategories();
+            c.ChangeName(id, UpdateCategoryName);
+
+        }
 
 
 
