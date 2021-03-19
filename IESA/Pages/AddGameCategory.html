@@ -101,7 +101,7 @@
 
 
                 alert("got into UpdateBtn")
-                var Categoryid = this.getAttribute('data-Categoryid');
+                Categoryid = this.getAttribute('data-Categoryid');
                 console.log("Categoryid:           " + Categoryid)
                // var Status1 = this.getAttribute('data-Status1');
 
@@ -111,7 +111,7 @@
                 str += "<br />"
                 str += "<br />"
                 str += "<label for='fname'>אנא עדכן כאן את שם הקטגוריה:</label>"
-                str += "<p>שם קטגוריה ישן:" + Update_Id + "</p>"
+             //   str += "<p>שם קטגוריה ישן:" + Update_Id + "</p>"
                 str+="<p>הכנס את השם החדש כאן:"
                 str += "<input type='text' id='Update_Category' name='fname'>"
                 str += "<button id='UpdateGameCategory' class='UGC  btn btn-light'>עדכן</button>"
@@ -138,7 +138,7 @@
 
             $(document).on("click", ".UGC", function () {
                 var UpdateCategoryName = $("#Update_Category").val()
-                console.log("UpdateCategoryName:  " + UpdateCategoryName)
+                console.log("UpdateCategoryName:  " + UpdateCategoryName + "      ID:   " + Categoryid )
                 Update_GameCategory_Name(Categoryid, UpdateCategoryName);
 
             })
@@ -405,20 +405,26 @@
         function Update_GameCategory_Name(Categoryid, UpdateCategoryName) {
 
                 alert("got into the Update of a Category Name")
-
+            console.log("Second time of-" +
+                        "UpdateCategoryName: " + UpdateCategoryName + "      ID: " + Categoryid)
 
 
                
 
 
-            ajaxCall("PUT", "../api/GamesCategories?id=" + Categoryid + "&UpdateCategoryName=" + UpdateCategoryName, "", deleteSuccess, deleterror);
+            ajaxCall("PUT", "../api/GamesCategories/mark1?id=" + Categoryid + "&UpdateCategoryName=" + UpdateCategoryName, "", updateSuccess, updaterror);
 
                 //כאן יהיה PUT לעדכון השם
 
 
-            }
+        }
 
 
+
+
+        function updateSuccess() {alert("success update")}
+
+        function updaterror() { alert("fail update") }
     </script>
 
 

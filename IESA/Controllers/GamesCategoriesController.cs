@@ -26,17 +26,22 @@ namespace IESA.Controllers
 
 
 
-
+        [HttpGet]
+        [Route("api/GamesCategories/mark1")]
 
         public void Put(int id, string status)
         {
             GamesCategories c = new GamesCategories();
             c.setNotactive(id, status);
 
-        } 
+        }
 
 
         //צריך לשים פה ROUTE שידע ללכת לכאן
+
+        [HttpGet]
+        [Route("api/GamesCategories/mark1")]
+
         public void Put(int id, string UpdateCategoryName)
         {
             GamesCategories c = new GamesCategories();
